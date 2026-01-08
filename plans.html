@@ -98,7 +98,7 @@
                     <li><i class="fas fa-clock"></i> مدة: 30 يوم</li>
                     <li><i class="fas fa-chart-line"></i> عائد يومي: 0.5% - 0.7%</li>
                 </ul>
-                <button class="btn btn-primary w-100" style="width: 100%;" onclick="buyPlan('Starter', 100)">شراء
+                <button class="btn btn-primary w-100" style="width: 100%;" onclick="buyPlan('PLAN_STARTER', 100)">شراء
                     الآن</button>
             </div>
 
@@ -111,7 +111,7 @@
                     <li><i class="fas fa-clock"></i> مدة: 90 يوم</li>
                     <li><i class="fas fa-chart-line"></i> عائد يومي: 0.6% - 0.9%</li>
                 </ul>
-                <button class="btn btn-primary w-100" style="width: 100%;" onclick="buyPlan('Pro', 500)">شراء
+                <button class="btn btn-primary w-100" style="width: 100%;" onclick="buyPlan('PLAN_PRO', 500)">شراء
                     الآن</button>
             </div>
 
@@ -124,16 +124,38 @@
                     <li><i class="fas fa-clock"></i> مدة: 180 يوم</li>
                     <li><i class="fas fa-chart-line"></i> عائد يومي: 0.8% - 1.2%</li>
                 </ul>
-                <button class="btn btn-primary w-100" style="width: 100%;" onclick="buyPlan('Elite', 2000)">شراء
+                <button class="btn btn-primary w-100" style="width: 100%;" onclick="buyPlan('PLAN_ELITE', 2000)">شراء
                     الآن</button>
             </div>
         </div>
     </main>
 
+    <script src="api_bridge.js"></script>
     <script>
-        function buyPlan(name, price) {
-            if (confirm(`هل أنت متأكد من شراء ${name} مقابل ${price} USDT؟`)) {
-                alert('جاري معالجة الطلب... سيتم تفعيل الباقة بعد التأكد من الرصيد.');
+        const user = UserState.get();
+        if (!user) window.location.href = 'auth.html';
+
+        async function buyPlan(planId, price) {
+            if (confirm(`هل أنت متأكد من شراء هذه الباقة مقابل ${price} USDT؟`)) {
+                // Show loading status
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.disabled = true;
+                btn.innerText = 'جاري المعالجة...';
+
+                const result = await API.purchasePlan(user.id, planId);
+
+                if (result.success) {
+                    alert('تم شراء الباقة بنجاح! الرصيد المتبقي: ' + result.new_balance + ' USDT');
+                    // Update local user state balance
+                    user.balance_usdt = result.new_balance;
+                    UserState.set(user);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert('خطأ: ' + (result.error || 'فشلت عملية الشراء'));
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                }
             }
         }
     </script>

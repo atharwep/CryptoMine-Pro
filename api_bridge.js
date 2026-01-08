@@ -2,7 +2,7 @@
  * CryptoMine Pro - Frontend API Bridge
  */
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMZIu2zNWf8jYI8oNcEqInNeZDA9_4yvM6LZD0h2po4R_0mB6xhbsAUbQSn8QXB_DB/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWhaAQ1R8WVf5bLc4TpbxKBH2uPpODwD0k-S41Xwclg8piFkiDx1YINWIv9eWtbV1_/exec';
 const API_KEY = 'CRYPTO_SECURE_KEY_2026'; // يجب أن يطابق المفتاح في GAS
 
 const API = {
@@ -67,6 +67,10 @@ const API = {
             status: 'Pending',
             created_at: new Date()
         }, 'POST');
+    },
+
+    async purchasePlan(userId, planId) {
+        return await this.call('purchase_plan', { user_id: userId, plan_id: planId }, 'POST');
     },
 
     // Admin Actions

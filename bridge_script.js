@@ -29,6 +29,16 @@ function initDatabase() {
       sheet = ss.insertSheet(name);
       sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
       sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#f2a900').setFontColor('#000000');
+
+      // إضافة بيانات أولية للباقات إذا كانت فارغة
+      if (name === 'MiningPlans') {
+        const defaultPlans = [
+          ['PLAN_STARTER', 'باقة المبتدئين', 100, '500 GH/s', 30, 0.7],
+          ['PLAN_PRO', 'باقة المحترفين', 500, '3000 GH/s', 90, 0.9],
+          ['PLAN_ELITE', 'باقة النخبة', 2000, '15,000 GH/s', 180, 1.2]
+        ];
+        sheet.getRange(2, 1, defaultPlans.length, defaultPlans[0].length).setValues(defaultPlans);
+      }
     }
   }
 
@@ -132,6 +142,51 @@ function approveTransaction(txId) {
     return { success: true };
   }
   return { error: 'Transaction not found or already processed' };
+}
+
+function purchasePlan(data) {
+  const user = getRows('Users').find(u => u.id == data.user_id);
+  const plan = getRows('MiningPlans').find(u => u.id == data.plan_id);
+
+  if (!user || !plan) return { error: 'User or Plan not found' };
+
+  const price = Number(plan.price);
+  const balance = Number(user.balance_usdt);
+
+  if (balance < price) return { error: 'Insufficient balance' };
+
+  // 1. DEDUCT BALANCE
+  const newBalance = balance - price;
+  updateRow('Users', 'id', user.id, { balance_usdt: newBalance });
+
+  // 2. CREATE CONTRACT
+  const startDate = new Date();
+  const endDate = new Date();
+  endDate.setDate(startDate.getDate() + Number(plan.duration_days));
+
+  const contract = {
+    id: Utilities.getUuid(),
+    user_id: user.id,
+    plan_id: plan.id,
+    start_date: startDate,
+    end_date: endDate,
+    earned_amount: 0,
+    status: 'Active'
+  };
+  addRow('UserContracts', contract);
+
+  // 3. LOG TRANSACTION
+  addRow('Transactions', {
+    id: Utilities.getUuid(),
+    user_id: user.id,
+    type: 'Plan Purchase',
+    amount: -price,
+    currency: 'USDT',
+    status: 'Completed',
+    created_at: new Date()
+  });
+
+  return { success: true, new_balance: newBalance };
 }
 
 function updateRow(sheetName, key, value, updateData) {
