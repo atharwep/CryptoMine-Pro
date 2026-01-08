@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoMine Pro | منصة التعدين الرقمي المتطورة</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(242, 169, 0, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(0, 255, 204, 0.05), transparent);
+        }
+        .hero h1 { font-size: 4rem; margin-bottom: 24px; line-height: 1.2; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
+        
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 16px; }
+        
+        .feature-card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+        
+        .plan-price { font-size: 2.5rem; font-weight: 800; margin: 20px 0; color: var(--primary); }
+        .plan-features { list-style: none; margin-bottom: 30px; text-align: right; padding-right: 0; }
+        .plan-features li { margin-bottom: 12px; color: var(--text-muted); }
+        .plan-features li i { color: var(--primary); margin-left: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <i class="fas fa-cube"></i>
+            <span>CryptoMine Pro</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">الرئيسية</a>
+            <a href="#features">المميزات</a>
+            <a href="#plans">باقات التعدين</a>
+            <a href="#about">من نحن</a>
+        </div>
+        <div>
+            <a href="auth.html" class="btn btn-outline" style="margin-left: 10px;">تسجيل الدخول</a>
+            <a href="auth.html?signup=true" class="btn btn-primary">ابدأ الآن</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container animate-fade-in">
+            <h1 class="text-gold">مستقبل التعدين السحابي <br> بين يديك الآن</h1>
+            <p>انضم لآلاف المستثمرين الذين يحققون أرباحاً يومية من خلال أقوى منصة تعدين عملات رقمية في الشرق الأوسط. سهولة، أمان، وشفافية مطلقة.</p>
+            <div class="flex-center gap-20">
+                <a href="auth.html?signup=true" class="btn btn-primary btn-lg" style="font-size: 1.2rem; padding: 15px 40px;">إنشاء حساب مجاني</a>
+                <a href="#plans" class="btn btn-outline btn-lg" style="margin-right: 15px; font-size: 1.2rem; padding: 15px 40px;">عرض الباقات</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="container" style="padding: 100px 0;">
+        <div class="section-title">
+            <h2 class="text-gold">لماذا تختار منصتنا؟</h2>
+            <p>نحن نوفر لك أفضل الحلول التقنية لضمان أعلى عوائد ربحية.</p>
+        </div>
+        <div class="grid-3">
+            <div class="glass-card feature-card">
+                <i class="fas fa-shield-halved"></i>
+                <h3>أمان فائق</h3>
+                <p>تشفير AES-256 ومحافظ باردة لضمان حماية أصولك الرقمية من أي تهديد.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>تعدين فوري</h3>
+                <p>بمجرد تفعيل الباقة، تبدأ أجهزة التعدين بالعمل فوراً وتظهر الأرباح في حسابك.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <i class="fas fa-wallet"></i>
+                <h3>سحب سريع</h3>
+                <p>نظام سحب آلي ومعالجة الطلبات خلال أقل من 24 ساعة لأي محفظة خارجية.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" style="background: var(--bg-card); padding: 100px 0;">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="text-gold">باقات التعدين السحابي</h2>
+                <p>اختر الباقة التي تناسب تطلعاتك الاستثمارية وابدأ بجني الأرباح.</p>
+            </div>
+            <div class="grid-3">
+                <!-- Plan 1 -->
+                <div class="glass-card text-center">
+                    <h3>باقة المبتدئين</h3>
+                    <div class="plan-price">$100</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> قوة تعدين: 500 GH/s</li>
+                        <li><i class="fas fa-check"></i> مدة العقد: 30 يوم</li>
+                        <li><i class="fas fa-check"></i> العائد المتوقع: 15% - 20%</li>
+                        <li><i class="fas fa-check"></i> دعم فني 24/7</li>
+                    </ul>
+                    <a href="auth.html" class="btn btn-primary w-100" style="width: 100%;">اشترِ الآن</a>
+                </div>
+                <!-- Plan 2 -->
+                <div class="glass-card text-center" style="border-color: var(--primary); transform: scale(1.05);">
+                    <div style="background: var(--primary); color: #000; display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px;">الأكثر طلباً</div>
+                    <h3>باقة المحترفين</h3>
+                    <div class="plan-price">$500</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> قوة تعدين: 3000 GH/s</li>
+                        <li><i class="fas fa-check"></i> مدة العقد: 90 يوم</li>
+                        <li><i class="fas fa-check"></i> العائد المتوقع: 30% - 45%</li>
+                        <li><i class="fas fa-check"></i> مكافآت يومية</li>
+                    </ul>
+                    <a href="auth.html" class="btn btn-primary w-100" style="width: 100%;">اشترِ الآن</a>
+                </div>
+                <!-- Plan 3 -->
+                <div class="glass-card text-center">
+                    <h3>باقة كبار المستثمرين</h3>
+                    <div class="plan-price">$2000</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> قوة تعدين: 15,000 GH/s</li>
+                        <li><i class="fas fa-check"></i> مدة العقد: 180 يوم</li>
+                        <li><i class="fas fa-check"></i> العائد المتوقع: 60% - 80%</li>
+                        <li><i class="fas fa-check"></i> مدير حساب مخصص</li>
+                    </ul>
+                    <a href="auth.html" class="btn btn-primary w-100" style="width: 100%;">اشترِ الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 0; border-top: 1px solid var(--border-color); margin-top: 100px;">
+        <div class="container text-center">
+            <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                <i class="fas fa-cube"></i>
+                <span>CryptoMine Pro</span>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">المنصة الأولى والأكثر أماناً لتعدين العملات الرقمية.</p>
+            <div class="nav-links" style="justify-content: center; margin-bottom: 30px;">
+                <a href="#">الشروط والأحكام</a>
+                <a href="#">سياسة الخصوصية</a>
+                <a href="#">تواصل معنا</a>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 CryptoMine Pro. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
