@@ -35,8 +35,13 @@ const API = {
         return await this.call('login', { email, password }, 'POST');
     },
 
-    async register(name, email, password) {
-        return await this.call('register', { username: name, email, password }, 'POST');
+    async register(name, email, password, referralCode = '') {
+        return await this.call('register', {
+            username: name,
+            email,
+            password,
+            referral_code_input: referralCode
+        }, 'POST');
     },
 
     // Data Fetching

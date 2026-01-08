@@ -130,6 +130,7 @@
         </div>
     </div>
 
+    <script src="api_bridge.js"></script>
     <script>
         let isLogin = true;
 
@@ -162,11 +163,37 @@
             }
         }
 
-        document.getElementById('auth-form').addEventListener('submit', function (e) {
+        document.getElementById('auth-form').addEventListener('submit', async function (e) {
             e.preventDefault();
-            // Placeholder logic for now
-            alert(isLogin ? 'جاري تسجيل الدخول...' : 'جاري إنشاء الحساب...');
-            window.location.href = 'dashboard.html';
+            const btn = this.querySelector('button');
+            const originalText = btn.innerHTML;
+
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value;
+
+            let result;
+            if (isLogin) {
+                result = await API.login(email, password);
+            } else {
+                // Check if there is a referral in the URL
+                const ref = new URLSearchParams(window.location.search).get('ref');
+                result = await API.register(username, email, password, ref);
+            }
+
+            if (result.success) {
+                UserState.set(result.user);
+                // Direct fast redirect
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('خطأ: ' + (result.error || 'فشلت العملية'));
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
         });
     </script>
 </body>
